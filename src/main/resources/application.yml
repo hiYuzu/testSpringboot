@@ -1,0 +1,9 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+
+baidu:
+  appId: 26017268
+  apiKey: 2yBA2P5GHHvdqQ1e24jmu1hR
+  secretKey: VvLsx8sOXs3niGnxlGI3t8bO6HFtMajN
