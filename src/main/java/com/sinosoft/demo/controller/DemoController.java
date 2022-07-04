@@ -8,10 +8,7 @@ import com.sinosoft.demo.model.ResponseModel;
 import com.sinosoft.demo.util.GlobalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.net.URLEncoder;
@@ -31,23 +28,14 @@ public class DemoController {
 
     @PostConstruct
     public void getCountryNucleic() {
+        String token = "Bearer 28c70f4f06ba40a990b49fc2f90efadf";
         try {
-            String encodeName1 = URLEncoder.encode("崔金卜", "UTF-8");
-            String encodeName2 = URLEncoder.encode("任娜", "UTF-8");
-            String encodeName3 = URLEncoder.encode("任世昕", "UTF-8");
-//            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNcovVaccinesInfo/v1.0.0?xm=" + encodeName1 + "&zjhm=130626199107252627";
-            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + encodeName1 + "&zjhm=133023197406011219";
-            String url2 = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + encodeName2 + "&zjhm=210282199403156647";
-            String url3 = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + encodeName2 + "&zjhm=210282200102116620";
-            String responseBody1 = HttpUtil.createGet(url1).header("Authorization", "Bearer 28c70f4f06ba40a990b49fc2f90efadf").contentType("application/json").execute().body();
+            String encodeName1 = URLEncoder.encode("姓名", "UTF-8");
+//            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNcovVaccinesInfo/v1.0.0?xm=" + encodeName1 + "&zjhm=证件号码";
+            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + encodeName1 + "&zjhm=证件号码";
+            String responseBody1 = HttpUtil.createGet(url1).header("Authorization", token).contentType("application/json").execute().body();
             LOG.info("=================================================================");
-            LOG.info("张威：\n" + responseBody1);
-            String responseBody2 = HttpUtil.createGet(url2).header("Authorization", "Bearer 28c70f4f06ba40a990b49fc2f90efadf").contentType("application/json").execute().body();
-            LOG.info("=================================================================");
-            LOG.info("任娜：\n" + responseBody2);
-            String responseBody3 = HttpUtil.createGet(url3).header("Authorization", "Bearer 28c70f4f06ba40a990b49fc2f90efadf").contentType("application/json").execute().body();
-            LOG.info("=================================================================");
-            LOG.info("任世昕：\n" + responseBody3);
+            LOG.info(responseBody1);
             LOG.info("=================================================================");
         } catch (Exception e) {
             e.printStackTrace();
