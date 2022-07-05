@@ -19,7 +19,7 @@ public class MyInterceptor implements HandlerInterceptor {
     private static final Logger LOG = LoggerFactory.getLogger(MyInterceptor.class);
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        final String openUrI = "/baiduai/";
+        final String openUrI = "/openApi/";
         if (request.getRequestURI().startsWith(openUrI) && isWhiteIp(request.getRemoteHost())) {
             // 仅判断是否含有指定RequestHeader，不做具体验证
             return StrUtil.isNotEmpty(request.getHeader(GlobalUtil.AUTH_HEADER));
