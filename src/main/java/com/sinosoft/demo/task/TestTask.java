@@ -25,10 +25,9 @@ public class TestTask {
 
     @PostConstruct
     public void test() {
-        long count = hbjkmZdgkryAutoService.count();
-        System.out.println("" + count);
+        LOG.info("测试数据库连接...");
         QueryWrapper<HbjkmZdgkryAuto> queryWrapper = new QueryWrapper<>();
         queryWrapper.gt("create_time", "2022-08-30 13:00:00").last("LIMIT 1");
-        System.out.println(JSONUtil.toJsonPrettyStr(hbjkmZdgkryAutoService.getOne(queryWrapper)));
+        System.out.println(JSONUtil.toJsonPrettyStr(hbjkmZdgkryAutoService.list(queryWrapper).get(0)));
     }
 }
