@@ -39,7 +39,13 @@ spring:
         filters: stat,wall,slf4j
       datasource:
         master:
-          url: jdbc:mysql://127.0.0.1:3306/hbwjw?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+          url: jdbc:mysql://188.2.44.39:3306/hbwjw?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+          username: root
+          password: SinosoftIIG-2022
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        # 风险排查
+        risk:
+          url: jdbc:mysql://188.2.44.53:3306/jykp_app?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
           username: root
           password: SinosoftIIG-2022
           driver-class-name: com.mysql.cj.jdbc.Driver

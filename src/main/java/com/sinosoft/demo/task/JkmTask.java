@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -17,13 +16,13 @@ import javax.annotation.Resource;
  * @date 2022/8/30 13:42
  */
 @Component
-public class TestTask {
-    private static final Logger LOG = LoggerFactory.getLogger(TestTask.class);
+public class JkmTask {
+    private static final Logger LOG = LoggerFactory.getLogger(JkmTask.class);
 
     @Resource
     private IHbjkmZdgkryAutoService hbjkmZdgkryAutoService;
 
-    @PostConstruct
+//    @PostConstruct
     public void test() {
         LOG.info("测试数据库连接...");
         QueryWrapper<HbjkmZdgkryAuto> queryWrapper = new QueryWrapper<>();
