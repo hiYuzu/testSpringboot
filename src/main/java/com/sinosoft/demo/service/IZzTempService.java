@@ -3,6 +3,8 @@ package com.sinosoft.demo.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sinosoft.demo.entity.ZzTemp;
 
+import java.util.List;
+
 /**
  * @author hiYuzu
  * @version v1.0
@@ -10,4 +12,5 @@ import com.sinosoft.demo.entity.ZzTemp;
  */
 public interface IZzTempService extends IService<ZzTemp> {
     void updateSourceData(String tableName, String pxhsjhm);
+    void updateSourceData(String tableName, List<ZzTemp> zzTemps);
 }
