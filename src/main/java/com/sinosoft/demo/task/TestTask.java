@@ -8,7 +8,6 @@ import com.sinosoft.demo.service.IMedicineInfoTempService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +19,19 @@ import java.util.List;
  */
 @Slf4j
 @Component
+<<<<<<< HEAD:src/main/java/com/sinosoft/demo/task/TestTask.java
 public class TestTask {
+=======
+public class JkmTask {
+    private static final Logger LOG = LoggerFactory.getLogger(JkmTask.class);
+
+>>>>>>> 063f44ff9be7b786650808969c1e5f134b57fb9c:src/main/java/com/sinosoft/demo/task/JkmTask.java
     @Resource
     private IMedicineInfoAlService medicineInfoAlService;
     @Resource
     private IMedicineInfoTempService medicineInfoTempService;
 
-    @PostConstruct
+//    @PostConstruct
     public void test() {
         log.info("测试数据库连接...");
         QueryWrapper<MedicineAlInfo> alQw = new QueryWrapper<>();
