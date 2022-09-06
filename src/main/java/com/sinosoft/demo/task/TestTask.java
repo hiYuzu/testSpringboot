@@ -1,33 +1,51 @@
 package com.sinosoft.demo.task;
 
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sinosoft.demo.entity.HbjkmZdgkryAuto;
-import com.sinosoft.demo.service.IHbjkmZdgkryAutoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.sinosoft.demo.entity.MedicineAlInfo;
+import com.sinosoft.demo.entity.MedicineInfoTemp;
+import com.sinosoft.demo.service.IMedicineInfoAlService;
+import com.sinosoft.demo.service.IMedicineInfoTempService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author hiYuzu
  * @version V1.0
  * @date 2022/8/30 13:42
  */
+@Slf4j
 @Component
 public class TestTask {
-    private static final Logger LOG = LoggerFactory.getLogger(TestTask.class);
-
     @Resource
-    private IHbjkmZdgkryAutoService hbjkmZdgkryAutoService;
+    private IMedicineInfoAlService medicineInfoAlService;
+    @Resource
+    private IMedicineInfoTempService medicineInfoTempService;
 
     @PostConstruct
     public void test() {
-        LOG.info("测试数据库连接...");
-        QueryWrapper<HbjkmZdgkryAuto> queryWrapper = new QueryWrapper<>();
-        queryWrapper.gt("create_time", "2022-08-30 13:00:00").last("LIMIT 1");
-        System.out.println(JSONUtil.toJsonPrettyStr(hbjkmZdgkryAutoService.list(queryWrapper).get(0)));
+        log.info("测试数据库连接...");
+        QueryWrapper<MedicineAlInfo> alQw = new QueryWrapper<>();
+        alQw.ge("buy_time", "2022-08-30 00:00:00").lt("buy_time", "2022-09-03 00:00:00");
+        alQw.select("UPPER(purchaser_card_no) AS purchaser_card_no", "SUBSTRING(region FROM 1 FOR 4) AS region");
+        List<MedicineAlInfo> alInfos = medicineInfoAlService.list(alQw);
+        log.info("数据量：" + alInfos.size());
+        List<MedicineInfoTemp> tempList = convertList(alInfos);
+        medicineInfoTempService.saveBatch(tempList, 100000);
+    }
+
+    private List<MedicineInfoTemp> convertList(List<MedicineAlInfo> alInfos) {
+        List<MedicineInfoTemp> tempList = new ArrayList<>();
+        for (MedicineAlInfo alInfo : alInfos) {
+            MedicineInfoTemp temp = new MedicineInfoTemp();
+            temp.setPurchaserCardNo(alInfo.getPurchaserCardNo());
+            temp.setRegion(alInfo.getRegion());
+            tempList.add(temp);
+        }
+        return tempList;
     }
 }
