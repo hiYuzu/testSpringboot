@@ -19,13 +19,8 @@ import java.util.List;
  */
 @Slf4j
 @Component
-<<<<<<< HEAD:src/main/java/com/sinosoft/demo/task/TestTask.java
 public class TestTask {
-=======
-public class JkmTask {
-    private static final Logger LOG = LoggerFactory.getLogger(JkmTask.class);
 
->>>>>>> 063f44ff9be7b786650808969c1e5f134b57fb9c:src/main/java/com/sinosoft/demo/task/JkmTask.java
     @Resource
     private IMedicineInfoAlService medicineInfoAlService;
     @Resource

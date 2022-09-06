@@ -1,12 +1,10 @@
 package com.sinosoft.demo.task;
 
-import cn.hutool.json.JSONUtil;
 import com.sinosoft.demo.entity.ZzTemp;
 import com.sinosoft.demo.service.IZzTempService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +20,7 @@ public class RiskTask {
     @Resource
     private IZzTempService zzTempService;
 
-    @PostConstruct
+//    @PostConstruct
     public void update() {
         log.info("开始处理...");
         List<ZzTemp> zzTemps = zzTempService.list();
