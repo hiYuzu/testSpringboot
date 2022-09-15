@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8082
   servlet:
     context-path: /
 
@@ -19,15 +19,15 @@ spring:
       druid: # 全局druid参数，绝大部分值和默认保持一致。(现已支持的参数如下,不清楚含义不要乱设置)
         # 连接池的配置信息
         # 初始化大小，最小，最大
-        initial-size: 5
-        min-idle: 5
+        initial-size: 1
+        min-idle: 1
         maxActive: 20
         # 配置获取连接等待超时的时间
         maxWait: 60000
         # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-        timeBetweenEvictionRunsMillis: 60000
+        timeBetweenEvictionRunsMillis: 10000
         # 配置一个连接在池中最小生存的时间，单位是毫秒
-        minEvictableIdleTimeMillis: 300000
+        minEvictableIdleTimeMillis: 30000
         validationQuery: SELECT 1
         testWhileIdle: true
         testOnBorrow: false
@@ -43,24 +43,29 @@ spring:
           username: root
           password: SinosoftIIG-2022
           driver-class-name: com.mysql.cj.jdbc.Driver
-        # 风险排查
-        risk:
-          url: jdbc:mysql://188.2.44.53:3306/jykp_app?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+        temp:
+          url: jdbc:mysql://188.2.44.33:3306/temp?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
           username: root
           password: SinosoftIIG-2022
           driver-class-name: com.mysql.cj.jdbc.Driver
-        # 阿里数据源
-        drugs:
-          url: jdbc:mysql://188.1.128.249:12883/query?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-          username: zkrread@sfrluz5b#
-          password: s3RRf@9EmX@L@Rwu4w
-          driver-class-name: com.mysql.cj.jdbc.Driver
-        doris:
-          url: jdbc:mysql://188.2.44.102:3306/direct?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-          username: root
-          password: SinosoftIIG-2022
-          driver-class-name: com.mysql.cj.jdbc.Driver
-        # 河北健康码
+#        # 风险排查
+#        risk:
+#          url: jdbc:mysql://188.2.44.53:3306/jykp_app?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+#          username: root
+#          password: SinosoftIIG-2022
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#        # 阿里数据源
+#        drugs:
+#          url: jdbc:mysql://188.1.128.249:12883/query?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+#          username: zkrread@sfrluz5b#
+#          password: s3RRf@9EmX@L@Rwu4w
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#        doris:
+#          url: jdbc:mysql://188.2.44.102:3306/direct?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+#          username: root
+#          password: SinosoftIIG-2022
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#        # 河北健康码
 #        jkm:
 #          url: jdbc:mysql://10.6.91.251:3306/hbwjw?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
 #          username: hbwjw
