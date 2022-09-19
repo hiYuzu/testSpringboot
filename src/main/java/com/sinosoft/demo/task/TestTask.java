@@ -1,14 +1,20 @@
 package com.sinosoft.demo.task;
 
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sinosoft.demo.entity.MedicineAlInfo;
 import com.sinosoft.demo.entity.MedicineInfoTemp;
 import com.sinosoft.demo.service.IMedicineInfoAlService;
 import com.sinosoft.demo.service.IMedicineInfoTempService;
+import com.sinosoft.demo.util.GlobalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 

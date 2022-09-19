@@ -27,4 +27,18 @@ public class DemoController {
             return e.getMessage();
         }
     }
+
+    @GetMapping("/getCountryVaccines")
+    public String getCountryVaccines(@RequestHeader(name = GlobalUtil.AUTH_HEADER) String authHeader , @RequestParam(name = "name") String name, @RequestParam(name = "idCard") String idCard) {
+        if (!GlobalUtil.IIG_AUTH.equals(authHeader)) {
+            return "未授权的访问！";
+        }
+        try {
+            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNcovVaccinesInfo/v1.0.0?xm=" + URLEncoder.encode(name, "UTF-8") + "&zjhm=" + idCard;
+            return HttpUtil.createGet(url1).header("Authorization", GlobalUtil.BEARER_TOKEN).contentType("application/json").execute().body().replace("\\", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }
