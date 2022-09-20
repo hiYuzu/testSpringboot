@@ -20,8 +20,8 @@ public class DemoController {
             return "未授权的访问！";
         }
         try {
-            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + URLEncoder.encode(name, "UTF-8") + "&zjhm=" + idCard;
-            return HttpUtil.createGet(url1).header("Authorization", GlobalUtil.BEARER_TOKEN).contentType("application/json").execute().body();
+            String url = "http://10.254.31.116:8280/hbwjw/result/getNcpNucleinInfo/v1.0.0?xm=" + URLEncoder.encode(name, "UTF-8") + "&zjhm=" + idCard;
+            return HttpUtil.createGet(url).header("Authorization", GlobalUtil.BEARER_TOKEN).contentType("application/json").execute().body();
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
@@ -34,8 +34,8 @@ public class DemoController {
             return "未授权的访问！";
         }
         try {
-            String url1 = "http://10.254.31.116:8280/hbwjw/result/getNcpNcovVaccinesInfo/v1.0.0?xm=" + URLEncoder.encode(name, "UTF-8") + "&zjhm=" + idCard;
-            return HttpUtil.createGet(url1).header("Authorization", GlobalUtil.BEARER_TOKEN).contentType("application/json").execute().body().replace("\\", "");
+            String url = "http://10.254.31.116:8280/hbwjw/result/getNcpNcovVaccinesInfo/v1.0.0?xm=" + URLEncoder.encode(name, "UTF-8") + "&zjhm=" + idCard;
+            return HttpUtil.createGet(url).header("Authorization", GlobalUtil.BEARER_TOKEN).contentType("application/json").execute().body().replace("\\", "");
         } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();

@@ -1,6 +1,5 @@
 package com.sinosoft.demo.service.impl;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sinosoft.demo.entity.PassNucleicSource;
 import com.sinosoft.demo.mapper.PassNucleicSourceMapper;
@@ -13,6 +12,5 @@ import org.springframework.stereotype.Service;
  * @date 2022/9/15 18:01
  */
 @Service("passNucleicSourceService")
-@DS("temp")
 public class PassNucleicSourceServiceImpl extends ServiceImpl<PassNucleicSourceMapper, PassNucleicSource> implements IPassNucleicSourceService {
 }
