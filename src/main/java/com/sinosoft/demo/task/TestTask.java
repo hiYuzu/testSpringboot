@@ -1,22 +1,11 @@
 package com.sinosoft.demo.task;
 
+import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sinosoft.demo.entity.MedicineAlInfo;
-import com.sinosoft.demo.entity.MedicineInfoTemp;
-import com.sinosoft.demo.service.IMedicineInfoAlService;
-import com.sinosoft.demo.service.IMedicineInfoTempService;
-import com.sinosoft.demo.util.GlobalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author hiYuzu
@@ -26,32 +15,17 @@ import java.util.List;
 @Slf4j
 @Component
 public class TestTask {
-
-    @Resource
-    private IMedicineInfoAlService medicineInfoAlService;
-    @Resource
-    private IMedicineInfoTempService medicineInfoTempService;
-
 //    @PostConstruct
     public void test() {
-        log.info("测试数据库连接...");
-        QueryWrapper<MedicineAlInfo> alQw = new QueryWrapper<>();
-        alQw.ge("buy_time", "2022-08-30 00:00:00").lt("buy_time", "2022-09-03 00:00:00");
-        alQw.select("UPPER(purchaser_card_no) AS purchaser_card_no", "SUBSTRING(region FROM 1 FOR 4) AS region");
-        List<MedicineAlInfo> alInfos = medicineInfoAlService.list(alQw);
-        log.info("数据量：" + alInfos.size());
-        List<MedicineInfoTemp> tempList = convertList(alInfos);
-        medicineInfoTempService.saveBatch(tempList, 100000);
-    }
-
-    private List<MedicineInfoTemp> convertList(List<MedicineAlInfo> alInfos) {
-        List<MedicineInfoTemp> tempList = new ArrayList<>();
-        for (MedicineAlInfo alInfo : alInfos) {
-            MedicineInfoTemp temp = new MedicineInfoTemp();
-            temp.setPurchaserCardNo(alInfo.getPurchaserCardNo());
-            temp.setRegion(alInfo.getRegion());
-            tempList.add(temp);
+        String identity = "130133195906283313";
+        String url = "http://188.2.44.95:8090/openApi/getDetail?identity=" + identity;
+        try (HttpResponse response = HttpUtil.createGet(url).header("IIG-AUTH", "jlf5ydoq-u7dh-olrp-n2mk-a8lrc8q3nfkw").setConnectionTimeout(20000).execute()) {
+            String responseStr = response.body();
+            JSONObject jsonObject = JSONUtil.parseObj(responseStr);
+            if ("200".equals(jsonObject.getStr("code"))) {
+                JSONObject data = jsonObject.getJSONObject("data");
+                System.out.println(JSONUtil.toJsonPrettyStr(data));
+            }
         }
-        return tempList;
     }
 }
