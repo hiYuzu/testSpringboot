@@ -23,7 +23,7 @@ public class LzlTask {
     @Resource
     private ILzlTaskService lzlTaskService;
 
-    @PostConstruct
+//    @PostConstruct
     public void initData() {
         ExcelReader reader = ExcelUtil.getReader("F:/task.xlsx");
         List<LzlTaskEntity> entities = reader.readAll(LzlTaskEntity.class);
