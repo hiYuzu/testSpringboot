@@ -28,7 +28,7 @@ public class AloneTask {
         // 查询类型
         String codeType = "popcode";
         // 证件号码
-        String identity = "370786199701155455";
+        String identity = "1231231231232133";
         // 开始日期
         String startDate = "2022-09-29";
         // 分类

@@ -23,12 +23,12 @@ public class EsTask {
         elasticsearchClient.createIndex("zxy_test_20220926");
 
         String id = "1";
-        String name = "赵晓阳";
-        String zjhm = "370786199701155455";
+        String name = "ddd";
+        String zjhm = "12312312123123123";
         try {
             elasticsearchClient.batchSave(id, name, zjhm);
             Thread.sleep(5000);
-            elasticsearchClient.search("赵晓阳");
+            elasticsearchClient.search("ddd");
         } catch (Exception e) {
             e.printStackTrace();
         }
