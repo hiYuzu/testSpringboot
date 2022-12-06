@@ -39,49 +39,10 @@ spring:
         filters: stat,wall,slf4j
       datasource:
         master:
-          url: jdbc:mysql://188.2.44.33:3306/temp?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+          url: jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
           username: root
-          password: SinosoftIIG-2022
+          password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
-        # 流调
-#        query:
-#          url: jdbc:mysql://188.1.128.249:12883/query?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: zkrcs@sfrluz5b#
-#          password: 0EoAtVIfOyZ$U2D$TC
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        local:
-#          url: jdbc:mysql://127.0.0.1:3306/springboot_demo?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: root
-#          password: root
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        hbwjw:
-#          url: jdbc:mysql://188.2.44.39:3306/hbwjw?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: root
-#          password: SinosoftIIG-2022
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        # 风险排查
-#        risk:
-#          url: jdbc:mysql://188.2.44.53:3306/jykp_app?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: root
-#          password: SinosoftIIG-2022
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        # 阿里数据源
-#        drugs:
-#          url: jdbc:mysql://188.1.128.249:12883/query?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: zkrread@sfrluz5b#
-#          password: s3RRf@9EmX@L@Rwu4w
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        doris:
-#          url: jdbc:mysql://188.2.44.102:3306/direct?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: root
-#          password: SinosoftIIG-2022
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#        # 河北健康码
-#        jkm:
-#          url: jdbc:mysql://10.6.91.251:3306/hbwjw?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-#          username: hbwjw
-#          password: hbwjw@12#$5!@
-#          driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
