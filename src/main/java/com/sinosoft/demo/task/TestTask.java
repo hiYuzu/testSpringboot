@@ -20,5 +20,6 @@ public class TestTask {
 
     @PostConstruct
     public void test() {
+        util.getData();
     }
 }

@@ -6,6 +6,7 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sinosoft.demo.entity.CountryVaccines;
 import com.sinosoft.demo.entity.VaccinesBasic;
 import com.sinosoft.demo.entity.VaccinesJzxxlb;
@@ -38,15 +39,31 @@ public class CountryVaccinesUtil {
 
     public void getData() {
         List<CountryVaccines> list = countryVaccinesService.list();
+        log.info("数据量：" + list.size());
+        int i = 0;
         List<VaccinesResult> results = new ArrayList<>();
         for (CountryVaccines entity : list) {
+            i++;
+            if (i % 10000 == 0) {
+                log.info("查询了" + i + "条数据...");
+            }
             String name = entity.getName();
             String idCard = entity.getIdCard();
             String url = "http://188.2.44.39/openApi/getCountryVaccines?name=" + name + "&idCard=" + idCard;
             try (HttpResponse response = HttpUtil.createGet(url).header("IIG-AUTH", "jlf5ydoq-u7dh-olrp-n2mk-a8lrc8q3nfkw").execute()) {
                 String body = response.body();
                 body = body.replaceAll("\\\\", "").replaceAll("\"", "");
-                JSONObject jsonObject = JSONUtil.parseObj(body);
+                JSONObject jsonObject;
+                try {
+                    jsonObject = JSONUtil.parseObj(body);
+                } catch (Exception e) {
+                    VaccinesResult temp = new VaccinesResult();
+                    temp.setXm(name);
+                    temp.setZjhm(idCard);
+                    temp.setGrdabh("没有查询到信息");
+                    results.add(temp);
+                    continue;
+                }
                 String data = jsonObject.getStr("data");
                 if (StrUtil.isNotBlank(data)) {
                     JSONObject jsonObject1 = JSONUtil.parseObj(data);
@@ -56,11 +73,12 @@ public class CountryVaccinesUtil {
                     VaccinesResult temp = new VaccinesResult();
                     temp.setXm(name);
                     temp.setZjhm(idCard);
-                    temp.setGrdabh("对不起没有查询到相关信息");
+                    temp.setGrdabh("没有查询到信息");
                     results.add(temp);
                 }
             }
         }
+        log.info("数据查询完毕，开始转换入库...");
         convertAndSaveResult(results);
     }
 
@@ -78,20 +96,22 @@ public class CountryVaccinesUtil {
             basic.setGazt(result.getGazt());
             basic.setGrdabh(result.getGrdabh());
             basics.add(basic);
-            for (VaccinesResult.Jzxxlb resultJzxxlb : result.getJzxxlb()) {
-                VaccinesJzxxlb jzxxlb = new VaccinesJzxxlb();
-                String jzxxlbId = UUID.fastUUID().toString(true);
-                jzxxlb.setId(jzxxlbId);
-                jzxxlb.setBasicId(basicId);
-                jzxxlb.setScqy(resultJzxxlb.getScqy());
-                jzxxlb.setJzrq(resultJzxxlb.getJzrq());
-                jzxxlb.setJc(resultJzxxlb.getJc());
-                jzxxlb.setJzd(resultJzxxlb.getJzd());
-                jzxxlb.setYmmc(resultJzxxlb.getYmmc());
-                jzxxlbs.add(jzxxlb);
+            if (result.getJzxxlb() != null) {
+                for (VaccinesResult.Jzxxlb resultJzxxlb : result.getJzxxlb()) {
+                    VaccinesJzxxlb jzxxlb = new VaccinesJzxxlb();
+                    String jzxxlbId = UUID.fastUUID().toString(true);
+                    jzxxlb.setId(jzxxlbId);
+                    jzxxlb.setBasicId(basicId);
+                    jzxxlb.setScqy(resultJzxxlb.getScqy());
+                    jzxxlb.setJzrq(resultJzxxlb.getJzrq());
+                    jzxxlb.setJc(resultJzxxlb.getJc());
+                    jzxxlb.setJzd(resultJzxxlb.getJzd());
+                    jzxxlb.setYmmc(resultJzxxlb.getYmmc());
+                    jzxxlbs.add(jzxxlb);
+                }
             }
         }
-        vaccinesBasicService.saveBatch(basics, 1000);
-        vaccinesJzxxlbService.saveBatch(jzxxlbs, 1000);
+        vaccinesBasicService.saveBatch(basics, 5000);
+        vaccinesJzxxlbService.saveBatch(jzxxlbs, 10000);
     }
 }
