@@ -4,20 +4,18 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author hiYuzu
  * @version V1.0
- * @date 2022/9/13 14:30
+ * @date 2022/12/6 20:30
  */
 @Data
-@TableName("yqfkpt_close_contact_20221007_tc")
-public class YqfkptCloseContact {
+@TableName("country_vaccines")
+public class CountryVaccines {
     @TableId
-    private String id;
+    private String idCard;
     /**
-     * 最后暴露日期
+     * 风险人员证件号码
      */
-    private Date zhblrq;
+    private String name;
 }

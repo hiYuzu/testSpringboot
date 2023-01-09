@@ -1,6 +1,5 @@
 package com.sinosoft.demo.task;
 
-import com.sinosoft.demo.service.IYqfkptCloseContactService;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.stereotype.Component;
