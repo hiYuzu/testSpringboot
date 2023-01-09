@@ -19,13 +19,7 @@ public class MyInterceptor implements HandlerInterceptor {
     private static final Logger LOG = LoggerFactory.getLogger(MyInterceptor.class);
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        final String openUrI = "/openApi/";
-        if (request.getRequestURI().startsWith(openUrI) && isWhiteIp(request.getRemoteHost())) {
-            // 仅判断是否含有指定RequestHeader，不做具体验证
-            return StrUtil.isNotEmpty(request.getHeader(GlobalUtil.AUTH_HEADER));
-        }
-        LOG.warn("拒绝了" + request.getRemoteHost() +"访问：" + request.getRequestURI());
-        return false;
+        return true;
     }
 
     @Override
@@ -34,16 +28,5 @@ public class MyInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-    }
-
-    /**
-     * 未来可配置白名单IP，防止攻击
-     *
-     * @param remoteIp 访问IP
-     * @return 是否白名单IP
-     */
-    private boolean isWhiteIp(String remoteIp) {
-        // TODO..配置白名单IP
-        return true;
     }
 }
